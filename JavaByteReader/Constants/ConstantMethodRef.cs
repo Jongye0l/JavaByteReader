@@ -11,7 +11,7 @@ class ConstantMethodRef : Constant {
     public ConstantClass Class;
     public ConstantNameAndType NameAndType;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         ClassIndex = reader.ReadUInt16();
         NameAndTypeIndex = reader.ReadUInt16();
     }

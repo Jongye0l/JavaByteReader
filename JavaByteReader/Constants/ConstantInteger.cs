@@ -8,7 +8,7 @@ class ConstantInteger : Constant {
     public override byte TagCode => 3;
     public int data;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         data = reader.ReadInt32();
     }
 

@@ -9,7 +9,7 @@ class ConstantMethodType : Constant {
     public ushort descriptorIndex;
     public UTF8String descriptor;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         descriptorIndex = reader.ReadUInt16();
     }
 

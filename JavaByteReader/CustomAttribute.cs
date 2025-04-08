@@ -7,7 +7,7 @@ public class CustomAttribute {
     public UTF8String Name { get; set; }
     public byte[] data;
 
-    internal CustomAttribute(BinaryReader reader, Constant[] constants) {
+    internal CustomAttribute(FixedBinaryReader reader, Constant[] constants) {
         ushort nameIndex = reader.ReadUInt16();
         Name = ((ConstantUTF8) constants[nameIndex]).data;
         uint length = reader.ReadUInt32();

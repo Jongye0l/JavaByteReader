@@ -8,7 +8,7 @@ class ConstantString : Constant {
     public ushort StringIndex;
     public UTF8String String;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         StringIndex = reader.ReadUInt16();
     }
 

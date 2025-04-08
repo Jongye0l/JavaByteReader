@@ -10,7 +10,7 @@ class ConstantMethodHandle : Constant {
     public byte referenceKind;
     public ushort referenceIndex;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         referenceKind = reader.ReadByte();
         referenceIndex = reader.ReadUInt16();
     }

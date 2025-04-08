@@ -3,11 +3,11 @@ using System.IO;
 
 namespace JavaByteReader;
 
-public class BinaryReader : IDisposable {
+public class FixedBinaryReader : IDisposable {
     private Stream _stream;
     private byte[] _buffer = new byte[8];
 
-    public BinaryReader(Stream stream) {
+    public FixedBinaryReader(Stream stream) {
         _stream = stream;
     }
 

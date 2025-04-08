@@ -10,7 +10,7 @@ class ConstantInvokeDynamic : Constant {
     public ushort nameAndTypeIndex;
     public ConstantNameAndType nameAndType;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         bootstrapMethodAttrIndex = reader.ReadUInt16();
         nameAndTypeIndex = reader.ReadUInt16();
     }

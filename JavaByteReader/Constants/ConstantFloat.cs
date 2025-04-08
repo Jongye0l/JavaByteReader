@@ -8,7 +8,7 @@ class ConstantFloat : Constant {
     public override byte TagCode => 4;
     public float data;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         data = reader.ReadSingle();
     }
 

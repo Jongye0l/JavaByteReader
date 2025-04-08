@@ -33,7 +33,7 @@ public class ClassDef : Class {
     public static ClassDef Load(Stream stream) => Load(null, stream);
 
     internal static ClassDef Load(Project project, Stream stream) {
-        using BinaryReader reader = new(stream);
+        using FixedBinaryReader reader = new(stream);
         uint magic = reader.ReadUInt32();
         if(magic != 0xCAFEBABE) throw new InvalidDataException("The file is not a valid Java class file.");
         ClassDef classDef = new() {

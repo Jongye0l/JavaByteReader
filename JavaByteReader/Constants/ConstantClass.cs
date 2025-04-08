@@ -9,7 +9,7 @@ class ConstantClass : Constant {
     public ushort NameIndex;
     public UTF8String Name;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         NameIndex = reader.ReadUInt16();
     }
 

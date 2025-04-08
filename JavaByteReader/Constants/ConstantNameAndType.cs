@@ -10,7 +10,7 @@ class ConstantNameAndType : Constant {
     public UTF8String name;
     public UTF8String descriptor;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         nameIndex = reader.ReadUInt16();
         descriptorIndex = reader.ReadUInt16();
     }

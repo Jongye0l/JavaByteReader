@@ -8,7 +8,7 @@ class ConstantUTF8 : Constant {
     public override byte TagCode => 1;
     public UTF8String data;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         ushort length = reader.ReadUInt16();
         byte[] bytes = reader.ReadBytes(length);
         data = new UTF8String(bytes);

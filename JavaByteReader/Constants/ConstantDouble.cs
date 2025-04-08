@@ -8,7 +8,7 @@ class ConstantDouble : Constant {
     public override byte TagCode => 6;
     public double data;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         data = reader.ReadDouble();
     }
 

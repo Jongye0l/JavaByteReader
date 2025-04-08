@@ -8,7 +8,7 @@ class ConstantLong : Constant {
     public override byte TagCode => 5;
     public long data;
 
-    public override void Read(BinaryReader reader) {
+    public override void Read(FixedBinaryReader reader) {
         data = reader.ReadInt64();
     }
 
