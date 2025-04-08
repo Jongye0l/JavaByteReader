@@ -15,7 +15,7 @@ public class Project {
     }
 
     public static Project Load(byte[] bytes) {
-        using MemoryStream stream = new MemoryStream(bytes);
+        using MemoryStream stream = new(bytes);
         return Load(stream);
     }
 

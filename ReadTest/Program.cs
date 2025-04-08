@@ -12,7 +12,7 @@ namespace ReadTest {
                 Console.WriteLine($"Method: {method.Name}");
                 Console.WriteLine($"Descriptor: {method.Descriptor}");
                 Console.WriteLine($"Access Flags: {method.AccessFlags}");
-                foreach(CustomAttribute customAttribute in method.CustomAttributes) {
+                foreach(JavaAttribute customAttribute in method.CustomAttributes) {
                     Console.WriteLine($"Custom Attribute: {customAttribute.Name}");
                 }
             }
@@ -21,7 +21,7 @@ namespace ReadTest {
                 Console.WriteLine($"Field: {field.Name}");
                 Console.WriteLine($"Descriptor: {field.Descriptor}");
                 Console.WriteLine($"Access Flags: {field.AccessFlags}");
-                foreach(CustomAttribute customAttribute in field.CustomAttributes) {
+                foreach(JavaAttribute customAttribute in field.CustomAttributes) {
                     Console.WriteLine($"Custom Attribute: {customAttribute.Name}");
                 }
             }
@@ -30,7 +30,7 @@ namespace ReadTest {
                 Console.WriteLine($"Interface: {classRef.Name}");
             }
 
-            foreach(CustomAttribute customAttribute in classDef.CustomAttributes) {
+            foreach(JavaAttribute customAttribute in classDef.CustomAttributes) {
                 Console.WriteLine($"Custom Attribute: {customAttribute.Name}");
             }
         }

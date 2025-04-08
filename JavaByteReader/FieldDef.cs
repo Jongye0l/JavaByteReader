@@ -8,5 +8,5 @@ public class FieldDef : Field {
     public override string Name { get; set; }
     public override string Descriptor { get; set; }
     public FieldAccessFlags AccessFlags { get; set; }
-    public List<CustomAttribute> CustomAttributes { get; } = [];
+    public List<JavaAttribute> CustomAttributes { get; } = [];
 }

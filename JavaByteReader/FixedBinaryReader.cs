@@ -65,6 +65,16 @@ public class FixedBinaryReader : IDisposable {
         return BitConverter.ToDouble(_buffer, 0);
     }
 
+    public char ReadChar() {
+        if(_stream.Read(_buffer, 0, 2) != 2) throw new EndOfStreamException();
+        return (char) (_buffer[0] << 8 | _buffer[1]);
+    }
+
+    public bool ReadBoolean() {
+        if(_stream.Read(_buffer, 0, 1) != 1) throw new EndOfStreamException();
+        return _buffer[0] != 0;
+    }
+
     public byte[] ReadBytes(int count) {
         byte[] bytes = new byte[count];
         int read = 0;

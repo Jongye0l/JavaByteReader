@@ -7,5 +7,5 @@ public class MethodDef : Method {
     public MethodAccessFlags AccessFlags;
     public override string Name { get; set; }
     public string Descriptor;
-    public List<CustomAttribute> CustomAttributes = [];
+    public List<JavaAttribute> CustomAttributes = [];
 }

@@ -10,16 +10,13 @@ namespace JavaByteReader;
 public class ClassDef : Class {
     public Project Project { get; set; }
     public override string Name { get; set; }
-    public ushort MajorVersion { get; set; }
-    public ushort MinorVersion { get; set; }
+    public ClassVersion Version { get; set; }
     public ClassAccessFlags AccessFlags { get; set; }
     public ClassRef BaseClass { get; set; }
     public List<ClassRef> Interfaces { get; } = [];
     public List<FieldDef> Fields { get; } = [];
     public List<MethodDef> Methods { get; } = [];
-    public List<CustomAttribute> CustomAttributes { get; } = [];
-
-    public string Version => MajorVersion + "." + MinorVersion;
+    public List<JavaAttribute> CustomAttributes { get; } = [];
 
     public static ClassDef Load(string path) {
         using FileStream fs = File.OpenRead(path);
@@ -38,8 +35,7 @@ public class ClassDef : Class {
         uint magic = reader.ReadUInt32();
         if(magic != 0xCAFEBABE) throw new InvalidDataException("The file is not a valid Java class file.");
         ClassDef classDef = new() {
-            MinorVersion = reader.ReadUInt16(),
-            MajorVersion = reader.ReadUInt16(),
+            Version = new ClassVersion(reader),
             Project = project
         };
         Constant[] constants = SetupConstants(reader);
@@ -60,7 +56,7 @@ public class ClassDef : Class {
             };
             ushort attributesCount = reader.ReadUInt16();
             field.CustomAttributes.Capacity = attributesCount;
-            for(int j = 0; j < attributesCount; j++) field.CustomAttributes.Add(new CustomAttribute(reader, constants));
+            for(int j = 0; j < attributesCount; j++) field.CustomAttributes.Add(JavaAttribute.ReadAttribute(reader, constants));
             classDef.Fields.Add(field);
         }
         ushort methodsCount = reader.ReadUInt16();
@@ -73,12 +69,12 @@ public class ClassDef : Class {
             };
             ushort attributesCount = reader.ReadUInt16();
             method.CustomAttributes.Capacity = attributesCount;
-            for(int j = 0; j < attributesCount; j++) method.CustomAttributes.Add(new CustomAttribute(reader, constants));
+            for(int j = 0; j < attributesCount; j++) method.CustomAttributes.Add(JavaAttribute.ReadAttribute(reader, constants));
             classDef.Methods.Add(method);
         }
         ushort cAttributesCount = reader.ReadUInt16();
         classDef.CustomAttributes.Capacity = cAttributesCount;
-        for(int i = 0; i < cAttributesCount; i++) classDef.CustomAttributes.Add(new CustomAttribute(reader, constants));
+        for(int i = 0; i < cAttributesCount; i++) classDef.CustomAttributes.Add(JavaAttribute.ReadAttribute(reader, constants));
         return classDef;
     }
 
