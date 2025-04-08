@@ -4,7 +4,7 @@ namespace JavaByteReader;
 
 public class ClassRef : Class {
     private Project project;
-    public override UTF8String Name { get; set; }
+    public override string Name { get; set; }
     public override ClassDef ToDef() {
         if(project != null) foreach(ClassDef classDef in project.Classes) {
             ClassDef findClass = project.FindClass(Name);
@@ -13,7 +13,7 @@ public class ClassRef : Class {
         throw new MissingMethodException("Class not found in project");
     }
 
-    internal ClassRef(Project project, UTF8String name) {
+    internal ClassRef(Project project, string name) {
         this.project = project;
         Name = name;
     }

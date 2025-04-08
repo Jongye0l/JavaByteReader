@@ -7,7 +7,7 @@ class ConstantMethodType : Constant {
 
     public override byte TagCode => 16;
     public ushort descriptorIndex;
-    public UTF8String descriptor;
+    public string descriptor;
 
     public override void Read(FixedBinaryReader reader) {
         descriptorIndex = reader.ReadUInt16();

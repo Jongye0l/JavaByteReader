@@ -1,5 +1,5 @@
 ﻿namespace JavaByteReader;
 
-public class Method {
-    
+public abstract class Method {
+    public abstract string Name { get; set; }
 }

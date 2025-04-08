@@ -6,7 +6,7 @@ using System.Linq;
 namespace JavaByteReader;
 
 public class Project {
-    public UTF8String Name { get; set; }
+    public string Name { get; set; }
     public List<ClassDef> Classes => classes;
 
     private readonly List<ClassDef> classes = [];
@@ -25,7 +25,7 @@ public class Project {
         throw new NotImplementedException();
     }
 
-    public ClassDef FindClass(UTF8String name) {
+    public ClassDef FindClass(string name) {
         return classes.FirstOrDefault(classDef => classDef.Name.Equals(name));
     }
 }

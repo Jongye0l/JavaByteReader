@@ -4,7 +4,7 @@ namespace JavaByteReader;
 
 public class MethodDef : Method {
     public ushort AccessFlags;
-    public UTF8String Name;
-    public UTF8String Descriptor;
+    public override string Name { get; set; }
+    public string Descriptor;
     public List<CustomAttribute> CustomAttributes = [];
 }

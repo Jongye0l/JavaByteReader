@@ -8,7 +8,7 @@ namespace JavaByteReader;
 
 public class ClassDef : Class {
     public Project Project { get; set; }
-    public override UTF8String Name { get; set; }
+    public override string Name { get; set; }
     public ushort MajorVersion { get; set; }
     public ushort MinorVersion { get; set; }
     public ushort AccessFlags { get; set; }
@@ -41,34 +41,7 @@ public class ClassDef : Class {
             MajorVersion = reader.ReadUInt16(),
             Project = project
         };
-        Constant[] constants = new Constant[reader.ReadUInt16()];
-        for(int i = 1; i < constants.Length; i++) {
-            byte tag = reader.ReadByte();
-            Constant constant = tag switch {
-                1 => new ConstantUTF8(),
-                3 => new ConstantInteger(),
-                4 => new ConstantFloat(),
-                5 => new ConstantLong(),
-                6 => new ConstantDouble(),
-                7 => new ConstantClass(),
-                8 => new ConstantString(),
-                9 => new ConstantFieldRef(),
-                10 => new ConstantMethodRef(),
-                11 => new ConstantInterfaceMethodRef(),
-                12 => new ConstantNameAndType(),
-                15 => new ConstantMethodHandle(),
-                16 => new ConstantMethodType(),
-                18 => new ConstantInvokeDynamic(),
-                _ => throw new InvalidDataException($"Unknown constant tag: {tag}")
-            };
-            constant.Read(reader);
-            foreach(FieldInfo field in constant.GetType().GetFields((BindingFlags) 15420)) {
-                object obj = field.GetValue(constant);
-                if(obj != null) Console.WriteLine(field.Name + ": " + obj);
-            }
-            constants[i] = constant;
-        }
-        foreach(Constant constant in constants) constant?.SetupValue(constants);
+        Constant[] constants = SetupConstants(reader);
         classDef.AccessFlags = reader.ReadUInt16();
         classDef.Name = ((ConstantClass) constants[reader.ReadUInt16()]).Name;
         project?.Classes.Add(classDef);
@@ -106,6 +79,38 @@ public class ClassDef : Class {
         classDef.CustomAttributes.Capacity = cAttributesCount;
         for(int i = 0; i < cAttributesCount; i++) classDef.CustomAttributes.Add(new CustomAttribute(reader, constants));
         return classDef;
+    }
+
+    private static Constant[] SetupConstants(FixedBinaryReader reader) {
+        Constant[] constants = new Constant[reader.ReadUInt16()];
+        for(int i = 1; i < constants.Length; i++) {
+            byte tag = reader.ReadByte();
+            Constant constant = tag switch {
+                1 => new ConstantUTF8(),
+                3 => new ConstantInteger(),
+                4 => new ConstantFloat(),
+                5 => new ConstantLong(),
+                6 => new ConstantDouble(),
+                7 => new ConstantClass(),
+                8 => new ConstantString(),
+                9 => new ConstantFieldRef(),
+                10 => new ConstantMethodRef(),
+                11 => new ConstantInterfaceMethodRef(),
+                12 => new ConstantNameAndType(),
+                15 => new ConstantMethodHandle(),
+                16 => new ConstantMethodType(),
+                18 => new ConstantInvokeDynamic(),
+                _ => throw new InvalidDataException($"Unknown constant tag: {tag}")
+            };
+            constant.Read(reader);
+            foreach(FieldInfo field in constant.GetType().GetFields((BindingFlags) 15420)) {
+                object obj = field.GetValue(constant);
+                if(obj != null) Console.WriteLine(field.Name + ": " + obj);
+            }
+            constants[i] = constant;
+        }
+        foreach(Constant constant in constants) constant?.SetupValue(constants);
+        return constants;
     }
 
     public override ClassDef ToDef() => this;

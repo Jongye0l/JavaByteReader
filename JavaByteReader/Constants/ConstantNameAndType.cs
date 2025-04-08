@@ -1,14 +1,12 @@
-﻿using System.IO;
-
-namespace JavaByteReader.Constants;
+﻿namespace JavaByteReader.Constants;
 
 class ConstantNameAndType : Constant {
 
     public override byte TagCode => 12;
     public ushort nameIndex;
     public ushort descriptorIndex;
-    public UTF8String name;
-    public UTF8String descriptor;
+    public string name;
+    public string descriptor;
 
     public override void Read(FixedBinaryReader reader) {
         nameIndex = reader.ReadUInt16();

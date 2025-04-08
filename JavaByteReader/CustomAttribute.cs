@@ -4,7 +4,7 @@ using JavaByteReader.Constants;
 namespace JavaByteReader;
 
 public class CustomAttribute {
-    public UTF8String Name { get; set; }
+    public string Name { get; set; }
     public byte[] data;
 
     internal CustomAttribute(FixedBinaryReader reader, Constant[] constants) {

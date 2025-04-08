@@ -6,7 +6,7 @@ namespace JavaByteReader.Constants;
 class ConstantString : Constant {
     public override byte TagCode => 8;
     public ushort StringIndex;
-    public UTF8String String;
+    public string String;
 
     public override void Read(FixedBinaryReader reader) {
         StringIndex = reader.ReadUInt16();
