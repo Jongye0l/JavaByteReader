@@ -7,9 +7,7 @@ namespace JavaByteReader;
 
 public class Project {
     public string Name { get; set; }
-    public List<ClassDef> Classes => classes;
-
-    private readonly List<ClassDef> classes = [];
+    public List<ClassDef> Classes { get; } = [];
 
     public static Project Load(string path) {
         using FileStream stream = File.OpenRead(path);
@@ -26,6 +24,6 @@ public class Project {
     }
 
     public ClassDef FindClass(string name) {
-        return classes.FirstOrDefault(classDef => classDef.Name.Equals(name));
+        return Classes.FirstOrDefault(classDef => classDef.Name.Equals(name));
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using JavaByteReader.AccessFlags;
 using JavaByteReader.Constants;
 
 namespace JavaByteReader;
@@ -11,7 +12,7 @@ public class ClassDef : Class {
     public override string Name { get; set; }
     public ushort MajorVersion { get; set; }
     public ushort MinorVersion { get; set; }
-    public ushort AccessFlags { get; set; }
+    public ClassAccessFlags AccessFlags { get; set; }
     public ClassRef BaseClass { get; set; }
     public List<ClassRef> Interfaces { get; } = [];
     public List<FieldDef> Fields { get; } = [];
@@ -42,7 +43,7 @@ public class ClassDef : Class {
             Project = project
         };
         Constant[] constants = SetupConstants(reader);
-        classDef.AccessFlags = reader.ReadUInt16();
+        classDef.AccessFlags = (ClassAccessFlags) reader.ReadUInt16();
         classDef.Name = ((ConstantClass) constants[reader.ReadUInt16()]).Name;
         project?.Classes.Add(classDef);
         classDef.BaseClass = new ClassRef(project, ((ConstantClass) constants[reader.ReadUInt16()]).Name);
@@ -53,7 +54,7 @@ public class ClassDef : Class {
         classDef.Fields.Capacity = fieldsCount;
         for(int i = 0; i < fieldsCount; i++) {
             FieldDef field = new() {
-                AccessFlags = reader.ReadUInt16(),
+                AccessFlags = (FieldAccessFlags) reader.ReadUInt16(),
                 Name = ((ConstantUTF8) constants[reader.ReadUInt16()]).data,
                 Descriptor = ((ConstantUTF8) constants[reader.ReadUInt16()]).data
             };

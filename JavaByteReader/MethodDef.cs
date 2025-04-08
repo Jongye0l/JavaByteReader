@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using JavaByteReader.AccessFlags;
 
 namespace JavaByteReader;
 
 public class MethodDef : Method {
-    public ushort AccessFlags;
+    public MethodAccessFlags AccessFlags;
     public override string Name { get; set; }
     public string Descriptor;
     public List<CustomAttribute> CustomAttributes = [];
