@@ -67,7 +67,7 @@ public class ClassDef : Class {
         classDef.Methods.Capacity = methodsCount;
         for(int i = 0; i < methodsCount; i++) {
             MethodDef method = new() {
-                AccessFlags = reader.ReadUInt16(),
+                AccessFlags = (MethodAccessFlags) reader.ReadUInt16(),
                 Name = ((ConstantUTF8) constants[reader.ReadUInt16()]).data,
                 Descriptor = ((ConstantUTF8) constants[reader.ReadUInt16()]).data
             };

@@ -43,6 +43,9 @@
         <Compile Include="AccessFlags\ClassAccessFlags.cs" />
         <Compile Include="AccessFlags\FieldAccessFlags.cs" />
         <Compile Include="AccessFlags\MethodAccessFlags.cs" />
+        <Compile Include="Emit\JavaCode.cs" />
+        <Compile Include="Emit\JavaOpCode.cs" />
+        <Compile Include="Emit\JavaOpCodes.cs" />
         <Compile Include="FixedBinaryReader.cs" />
         <Compile Include="CustomAttribute.cs" />
         <Compile Include="Class.cs" />
