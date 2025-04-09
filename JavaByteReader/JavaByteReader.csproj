@@ -78,7 +78,6 @@
         <Compile Include="Attribute\Data\VerificationTypeInfo.cs" />
         <Compile Include="ClassVersion.cs" />
         <Compile Include="Emit\JavaCode.cs" />
-        <Compile Include="Emit\JavaInstructionSize.cs" />
         <Compile Include="Emit\JavaOpCode.cs" />
         <Compile Include="Emit\JavaOpCodes.cs" />
         <Compile Include="Emit\JavaStackPop.cs" />
