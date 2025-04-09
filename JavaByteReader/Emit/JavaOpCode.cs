@@ -1,21 +1,19 @@
 ﻿namespace JavaByteReader.Emit;
 
 public sealed class JavaOpCode {
-    public readonly string name;
-    public readonly JavaCode code;
-    public readonly byte instructionSize;
-    public readonly byte getStackSize;
-    public readonly byte setStackSize;
+    public readonly string Name;
+    public readonly JavaCode Code;
+    public readonly JavaInstructionSize InstructionSize;
+    public readonly JavaStackPop StackPop;
+    public readonly JavaStackPush StackPush;
 
-    public JavaOpCode(string name, JavaCode code) {
-        this.name = name;
-        this.code = code;
-        JavaOpCodes.OpCodes[(int)code] = this;
-    }
-
-    public JavaOpCode(string name, JavaCode code, byte instructionSize, byte getStackSize, byte setStackSize) : this(name, code) {
-        this.instructionSize = instructionSize;
-        this.getStackSize = getStackSize;
-        this.setStackSize = setStackSize;
+    internal JavaOpCode(int flag) {
+        Code = (JavaCode) (flag & 0xFF);
+        JavaOpCodes.OpCodes[(int)Code] = this;
+        Name = Code.ToString();
+        if(Name.EndsWith("_")) Name = Name.Substring(0, Name.Length - 1);
+        InstructionSize = (JavaInstructionSize) (flag >> 8 & 0xFF);
+        StackPop = (JavaStackPop) (flag >> 16 & 0xFF);
+        StackPush = (JavaStackPush) (flag >> 24 & 0xFF);
     }
 }
