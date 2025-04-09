@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace JavaByteReader.Attribute.Data;
 
@@ -52,7 +53,7 @@ struct ElementValue {
                 value = elementValues;
                 break;
             default:
-                throw new NotImplementedException($"ElementValue tag {tag} not implemented.");
+                throw new InvalidDataException("Invalid element value tag: " + tag);
         }
     }
 }

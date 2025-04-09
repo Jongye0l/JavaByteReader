@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using JavaByteReader.Attribute;
 using JavaByteReader.Constants;
 
@@ -32,7 +33,7 @@ public abstract class JavaAttribute {
             AttributeRuntimeInvisibleParameterAnnotations.AttributeName => new AttributeRuntimeInvisibleParameterAnnotations(reader),
             AttributeAnnotationDefault.AttributeName => new AttributeAnnotationDefault(reader),
             AttributeBootstrapMethods.AttributeName => new AttributeBootstrapMethods(reader),
-            _ => throw new NotImplementedException($"Attribute {name} not implemented")
+            _ => throw new InvalidDataException("Invalid attribute name: " + name)
         };
     }
 
