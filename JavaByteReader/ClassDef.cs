@@ -8,6 +8,7 @@ using JavaByteReader.Constants;
 namespace JavaByteReader;
 
 public class ClassDef : Class {
+    public const uint Magic = 0xCAFEBABE;
     public Project Project { get; set; }
     public override string Name { get; set; }
     public ClassVersion Version { get; set; }
@@ -33,7 +34,7 @@ public class ClassDef : Class {
     internal static ClassDef Load(Project project, Stream stream) {
         using FixedBinaryReader reader = new(stream);
         uint magic = reader.ReadUInt32();
-        if(magic != 0xCAFEBABE) throw new InvalidDataException("The file is not a valid Java class file.");
+        if(magic != Magic) throw new InvalidDataException("The file is not a valid Java class file.");
         ClassDef classDef = new() {
             Version = new ClassVersion(reader),
             Project = project

@@ -83,6 +83,7 @@
         <Compile Include="FixedBinaryReader.cs" />
         <Compile Include="Attribute\AttributeCode.cs" />
         <Compile Include="Attribute\AttributeConstantValue.cs" />
+        <Compile Include="FixedBinaryWriter.cs" />
         <Compile Include="JavaAttribute.cs" />
         <Compile Include="Class.cs" />
         <Compile Include="ClassDef.cs" />

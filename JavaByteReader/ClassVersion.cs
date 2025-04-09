@@ -10,8 +10,8 @@ public struct ClassVersion {
     }
 
     public ClassVersion(FixedBinaryReader reader) {
-        majorVersion = reader.ReadUInt16();
         minorVersion = reader.ReadUInt16();
+        majorVersion = reader.ReadUInt16();
     }
 
     public override string ToString() {
