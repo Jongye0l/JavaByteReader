@@ -71,9 +71,7 @@
         <Compile Include="Attribute\Data\EnumConstValue.cs" />
         <Compile Include="Attribute\Data\FullFrame.cs" />
         <Compile Include="Attribute\Data\ParameterAnnotation.cs" />
-        <Compile Include="Attribute\Data\SameFrame.cs" />
         <Compile Include="Attribute\Data\SameFrameExtended.cs" />
-        <Compile Include="Attribute\Data\SameLocals1StackItemFrame.cs" />
         <Compile Include="Attribute\Data\SameLocals1StackItemFrameExtended.cs" />
         <Compile Include="Attribute\Data\StackMapFrame.cs" />
         <Compile Include="Attribute\Data\VariableInfoTag.cs" />
